@@ -1,15 +1,57 @@
 {
   "name": "escape-app",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
   "main": "main.js",
+  "description": "United Nations app.",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "watch": "nodemon --watch . --watch views --ext js,html,css --exec 'electron .'",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [],
   "author": "Pierre-Gérard David",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^18.0.3"
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "^18.0.3",
+    "electron-rebuild": "^3.2.7"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "lottie-web": "^5.9.2",
+    "mousetrap": "^1.6.5",
+    "usb-detection": "^4.14.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "escape_app"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
