@@ -41,3 +41,19 @@ body {
     text-align: center;
     color: white;
 }
+
+html {
+    position: relative;
+}
+
+.anomaly {
+    position: absolute;
+    left: 150px;
+    top: 150px;
+}
+
+.target {
+    position: absolute;
+    right: 150px;
+    top: 350px;
+}
