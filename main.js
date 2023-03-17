@@ -1,20 +1,17 @@
-const { app, BrowserWindow, Menu, MenuItem } = require('electron')
+const { app, BrowserWindow, Menu, MenuItem, globalShortcut } = require('electron')
 const path = require('path')
-const Mousetrap = require('mousetrap');
 const usbDetect = require('usb-detection');
 
-const serialNumber = '0719971F1AA12627'
+const serialNumber = 'E0D55EA574131661183410B9'
 
 let win
 
 const createWindow = () => {
   win = new BrowserWindow({
-    width: 1000,
-    height: 500,
-    frame: false,
+    width: 640,
+    height: 360,
     fullscreen: true,
     alwaysOnTop: true,
-    closable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -25,9 +22,9 @@ const createWindow = () => {
         detected = devices.find(device => device.serialNumber === serialNumber)
 
         if (!detected) {
-          win.loadFile('views/auth.html')
+          win.loadFile('views/failure.html')
         } else {
-          win.loadFile('views/restarted.html')
+          restarting()
         }
       })
 
@@ -37,10 +34,11 @@ const createWindow = () => {
       event.preventDefault();
   });
 
-  /*Mousetrap.bind(['command+k', 'ctrl+k'], () => {
-    console.log('quit')
-    app.quit()
-  });*/
+  globalShortcut.register('Esc', () => {
+    if (win.isFullScreen()) {
+      win.setFullScreen(false)
+    }
+  })
 
   win.maximize()
 }
@@ -71,21 +69,25 @@ app.whenReady().then(() => {
     console.log(device);
 
     if (device.serialNumber === serialNumber) {
-      win.loadFile('views/restarting.html')
-
-      setTimeout(() => {
-        win.loadFile('views/restarted.html', {"extraHeaders" : "pragma: no-cache\n"})
-      }, 3000)
+        restarting()
     }
   });
 
   usbDetect.on('remove', (device) => {
     console.log(device);
     if (device.serialNumber === serialNumber) {
-      win.loadFile('views/auth.html')
+      win.loadFile('views/failure.html')
     }
   });
 })
+
+const restarting = () => {
+  win.loadFile('views/restarting.html')
+
+  setTimeout(() => {
+    win.loadFile('views/restarted.html', {"extraHeaders" : "pragma: no-cache\n"})
+  }, 4000)
+}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()

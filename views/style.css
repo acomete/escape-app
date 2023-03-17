@@ -36,10 +36,12 @@ html, body {
 body {
     display: flex;
     flex: 1;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+    overflow: hidden;
 }
 
 html {
@@ -56,4 +58,27 @@ html {
     position: absolute;
     right: 150px;
     top: 350px;
+}
+
+.beat {
+    width: 100%
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 50px;
+    opacity: 0.8;
+}
+
+.logo p {
+    text-align: left;
+    font-size: 70px;
+    line-height: 25px;
+    font-weight: bold;
 }

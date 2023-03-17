@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="restarting.css">
+    <link rel="stylesheet" href="failure.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Seismograph backup data analysed</title>
+    <title>Seismograph fault detected</title>
 </head>
 <body>
 <div class="warning">
-    <h1>Analysing seismograph BLACK BOX</h1>
-    <p>please wait ...</p>
+    <div class="logo">
+        <img src="../assets/images/Volcano.png" width="300"/>
+        <div>
+            <p>Welcome to</p>
+            <p>STATION VOLCANO</p>
+        </div>
+    </div>
+    <h1 id="title">Seismograph FAILURE detected</h1>
 </div>
 <div class="beat">
     <div class="container">
@@ -27,5 +33,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="failure.js"></script>
 </body>
 </html>
